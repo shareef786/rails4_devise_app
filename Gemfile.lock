@@ -26,6 +26,10 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     arel (4.0.2)
+    babel-source (5.8.35)
+    babel-transpiler (0.7.0)
+      babel-source (>= 4.0, < 6)
+      execjs (~> 2.0)
     bcrypt (3.1.11)
     builder (3.1.4)
     coffee-rails (4.0.1)
@@ -35,6 +39,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
+    connection_pool (2.2.1)
     devise (3.5.10)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -80,6 +85,13 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (12.0.0)
     rdoc (4.3.0)
+    react-rails (1.10.0)
+      babel-transpiler (>= 0.7.0)
+      coffee-script-source (~> 1.8)
+      connection_pool
+      execjs
+      railties (>= 3.2)
+      tilt
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
     sass (3.2.19)
@@ -125,6 +137,7 @@ DEPENDENCIES
   jquery-rails
   pg
   rails (= 4.0.0)
+  react-rails (~> 1.0)
   sass-rails (~> 4.0.0)
   sdoc
   turbolinks
