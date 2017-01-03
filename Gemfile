@@ -7,6 +7,7 @@ gem 'rails', '4.0.0'
 gem 'pg'
 gem 'devise'
 gem 'react-rails', '~> 1.0'
+gem 'bootstrap-sass'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
