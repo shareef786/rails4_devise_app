@@ -120,8 +120,8 @@
       <excludeFolder url="file://$MODULE_DIR$/../rails4_devise_app/.bundle" />
       <excludeFolder url="file://$MODULE_DIR$/../rails4_devise_app/components" />
       <excludeFolder url="file://$MODULE_DIR$/../rails4_devise_app/public/system" />
-      <excludeFolder url="file://$MODULE_DIR$/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/../rails4_devise_app/vendor/bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/tmp" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

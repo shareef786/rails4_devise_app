@@ -7,6 +7,12 @@ Rails4DeviseApp::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'books#index'
+  get '/search', :to => 'books#search'
+  # resources :books do
+  #   collection do
+  #     get :search
+  #   end
+  # end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
