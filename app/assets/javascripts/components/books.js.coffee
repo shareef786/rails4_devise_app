@@ -12,6 +12,11 @@
       React.DOM.h2
         className: 'title'
         'Books'
+      React.DOM.div
+        className: 'row'
+        React.createElement AmountBox, type: "success", price: @credits(), text: "Credit"
+        React.createElement AmountBox, type: "danger", price: @debits(), text: "Dedit"
+        React.createElement AmountBox, type: "info", price: @balance(), text: "Balence"
       React.createElement BookForm, handleNewBook: @addBook
       React.DOM.hr null
       React.DOM.table
@@ -21,13 +26,30 @@
             React.DOM.th null, 'Date'
             React.DOM.th null, 'title'
             React.DOM.th null, 'price'
+            React.DOM.th null, 'Actions'
         React.DOM.tbody null,
           for book in @state.books
-            React.createElement Book, key: book.id, book: book
-
+            React.createElement Book, key: book.id, book: book, handleDeleteBook: @deleteBook
   addBook: (book) ->
-    books = @state.books.slice()
-    books.push book
+    books = React.addons.update(@state.books, { $push: [book] })
     @setState books: books
-  handlePrice: (e) ->
+  deleteBook: (book) ->
+    index = @state.books.indexOf book
+    books = React.addons.update(@state.books, { $splice: [[index, 1]] })
+    @replaceState books: books
+  debits: ->
+    debits = @state.books.filter (val) -> val.price < 0
+    debits.reduce ((prev, curr) ->
+      prev + parseFloat(curr.price)
+    ), 0
+   credits: ->
+     credits = @state.books.filter (val) -> val.price >= 0
+     credits.reduce ( (prev,curr) ->
+       prev + parseFloat(curr.price)
+     ), 0
+  balance: ->
+    @debits() + @credits()
+
+
+
     
