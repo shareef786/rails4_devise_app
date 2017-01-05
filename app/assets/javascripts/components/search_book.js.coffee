@@ -16,12 +16,13 @@
     React.DOM.form
       className: 'navbar-form navbar-right'
       role: 'search'
-      onSubmit: @handleSearch
+#      onSubmit: @handleSearch
       React.DOM.div
         className: 'input-group'
         React.DOM.input
           className: 'form-control'
-          placeholder: 'Search..Book'
+          placeholder: 'Search.. Book'
+          onChange: @handleSearch
           type: 'text'
           ref: 'search'
         React.DOM.div

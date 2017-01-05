@@ -4,6 +4,7 @@
 @Books = React.createClass
   getInitialState: ->
     books: @props.data
+    show_books_balance: false
   getDefaultProps: ->
     books: []
   render: ->
@@ -12,25 +13,58 @@
       React.DOM.h2
         className: 'title'
         'Books'
+      if @state.show_books_balance
+        @balanceBook()
+      else
+        React.DOM.a
+          className: 'pull-right pointer'
+          onClick: @displayBalance
+          'Check Balance'
+      React.createElement BookForm, handleNewBook: @addBook
+      React.DOM.hr null
+      React.createElement SearchBook, handleSearchBook: @searchBook
+      if @state.books.length > 0
+        @showBooks()
+      else
+        @hideBooks()
+  showBooks: ->
+    React.DOM.table
+      className: 'table table-bordered'
+      React.DOM.thead null,
+        React.DOM.tr null,
+          React.DOM.th null, 'Title'
+          React.DOM.th null, 'Price'
+          React.DOM.th null, 'Date'
+          React.DOM.th null, 'Actions'
+      React.DOM.tbody null,
+        for book in @state.books
+          React.createElement Book, key: book.id, book: book, handleDeleteBook: @deleteBook, handleUpdateBook: @updateBook
+  hideBooks: ->
+    React.DOM.div
+      className: ''
+      React.DOM.br null
+      React.DOM.br null
+      React.DOM.div
+        className: 'row'
+        React.DOM.div
+          className: 'text-center'
+          'No Books Available'
+  displayBalance: ->
+    @setState show_books_balance: true
+  hideBalance: ->
+    @setState show_books_balance: false
+  balanceBook: ->
+    React.DOM.div
+      className: ''
       React.DOM.div
         className: 'row'
         React.createElement AmountBox, type: "success", price: @credits(), text: "Credit"
         React.createElement AmountBox, type: "danger", price: @debits(), text: "Dedit"
         React.createElement AmountBox, type: "info", price: @balance(), text: "Balence"
-      React.createElement BookForm, handleNewBook: @addBook
-      React.DOM.hr null
-      React.createElement SearchBook, handleSearchBook: @searchBook
-      React.DOM.table
-        className: 'table table-bordered'
-        React.DOM.thead null,
-          React.DOM.tr null,
-            React.DOM.th null, 'Date'
-            React.DOM.th null, 'title'
-            React.DOM.th null, 'price'
-            React.DOM.th null, 'Actions'
-        React.DOM.tbody null,
-          for book in @state.books
-            React.createElement Book, key: book.id, book: book, handleDeleteBook: @deleteBook, handleUpdateBook: @updateBook
+      React.DOM.a
+        className: 'pull-right pointer'
+        onClick: @hideBalance
+        'Hide Balance'
   addBook: (book) ->
     books = React.addons.update(@state.books, { $push: [book] })
     @setState books: books

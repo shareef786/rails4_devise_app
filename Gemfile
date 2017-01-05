@@ -8,7 +8,7 @@ gem 'pg'
 gem 'devise'
 gem 'react-rails', '~> 1.0'
 gem 'bootstrap-sass'
-
+gem 'devise-bootstrapped', github: 'king601/devise-bootstrapped'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 

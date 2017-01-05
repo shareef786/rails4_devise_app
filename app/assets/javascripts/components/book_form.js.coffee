@@ -16,15 +16,6 @@
       React.DOM.div
         className: 'form-group'
         React.DOM.input
-          type: 'date'
-          className: 'form-control'
-          placeholder: 'Date'
-          name: 'date'
-          value: @state.date
-          onChange: @handleChange
-      React.DOM.div
-        className: 'form-group'
-        React.DOM.input
           type: 'text'
           className: 'form-control'
           name: 'title'
@@ -32,7 +23,7 @@
           value: @state.title
           onChange: @handleChange
       React.DOM.div
-        className: 'form-group'
+        className: 'form-group space-adjust'
         React.DOM.input
           className: 'form-control'
           type: 'number'
@@ -40,11 +31,21 @@
           placeholder: 'Price'
           value: @state.price
           onChange: @handleChange
+      React.DOM.div
+        className: 'form-group space-adjust'
+        React.DOM.input
+          type: 'date'
+          className: 'form-control'
+          placeholder: 'Date'
+          name: 'date'
+          value: @state.date
+          onChange: @handleChange
       React.DOM.button
         type: 'submit'
-        className: 'btn btn-primary'
+        className: 'btn btn-primary space-adjust'
         disabled: !@valid()
         'Create Book'
+
   handleChange: (e) ->
     name = e.target.name
     @setState "#{name}": e.target.value

@@ -2,7 +2,7 @@ class BooksController < ApplicationController
   before_filter :find_book, :only => [:update, :destroy]
 
   def index
-    @books = Book.all
+    @books = Book.all.sort_by(&:created_at)
   end
 
   def create

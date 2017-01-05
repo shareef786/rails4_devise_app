@@ -34,26 +34,20 @@
       @bookRow()
   bookRow: ->
     React.DOM.tr null,
-      React.DOM.td null, @props.book.date
       React.DOM.td null, @props.book.title
       React.DOM.td null, priceFormat(@props.book.price)
+      React.DOM.td null, @props.book.date
       React.DOM.td null,
         React.DOM.a
           className: 'btn btn-default'
           onClick: @handleToggle
           'Edit'
         React.DOM.a
-          className: 'btn btn-danger'
+          className: 'btn btn-danger space-adjust'
           onClick: @handleDelete
           'Delete'
   bookForm: ->
     React.DOM.tr null,
-      React.DOM.td null,
-        React.DOM.input
-          className: 'form-control'
-          type: 'date'
-          defaultValue: @props.book.date
-          ref: 'date'
       React.DOM.td null,
         React.DOM.input
           className: 'form-control'
@@ -67,11 +61,17 @@
           defaultValue: @props.book.price
           ref: 'price'
       React.DOM.td null,
+        React.DOM.input
+          className: 'form-control'
+          type: 'date'
+          defaultValue: @props.book.date
+          ref: 'date'
+      React.DOM.td null,
         React.DOM.a
           className: 'btn btn-default'
           onClick: @handleUpdate
           'Update'
         React.DOM.a
-          className: 'btn btn-default'
+          className: 'btn btn-default space-adjust'
           onClick: @handleToggle
           'Cancel'
