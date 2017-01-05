@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../rails4_react_app/.idea/rails4_devise_app.iml" filepath="$PROJECT_DIR$/../rails4_react_app/.idea/rails4_devise_app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/rails4_devise_app.iml" filepath="$PROJECT_DIR$/.idea/rails4_devise_app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../rails_and_react/.idea/rails_and_react.iml" filepath="$PROJECT_DIR$/../rails_and_react/.idea/rails_and_react.iml" />
       <module fileurl="file://$PROJECT_DIR$/../sample-react-rails-app/.idea/sample-react-rails-app.iml" filepath="$PROJECT_DIR$/../sample-react-rails-app/.idea/sample-react-rails-app.iml" />
     </modules>
   </component>

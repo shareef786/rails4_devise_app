@@ -19,6 +19,7 @@
         React.createElement AmountBox, type: "info", price: @balance(), text: "Balence"
       React.createElement BookForm, handleNewBook: @addBook
       React.DOM.hr null
+      React.createElement SearchBook, handleSearchBook: @searchBook
       React.DOM.table
         className: 'table table-bordered'
         React.DOM.thead null,
@@ -29,7 +30,7 @@
             React.DOM.th null, 'Actions'
         React.DOM.tbody null,
           for book in @state.books
-            React.createElement Book, key: book.id, book: book, handleDeleteBook: @deleteBook
+            React.createElement Book, key: book.id, book: book, handleDeleteBook: @deleteBook, handleUpdateBook: @updateBook
   addBook: (book) ->
     books = React.addons.update(@state.books, { $push: [book] })
     @setState books: books
@@ -37,6 +38,12 @@
     index = @state.books.indexOf book
     books = React.addons.update(@state.books, { $splice: [[index, 1]] })
     @replaceState books: books
+  updateBook: (book, data) ->
+    index = @state.books.indexOf book
+    books = React.addons.update(@state.books, { $splice: [[index, 1, data]]})
+    @replaceState books: books
+  searchBook: (data) ->
+    @setState books: data
   debits: ->
     debits = @state.books.filter (val) -> val.price < 0
     debits.reduce ((prev, curr) ->
@@ -49,7 +56,3 @@
      ), 0
   balance: ->
     @debits() + @credits()
-
-
-
-    
