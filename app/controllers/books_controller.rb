@@ -3,6 +3,7 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.all.sort_by(&:created_at)
+    @data = Book.data_series(3.weeks.ago)
   end
 
   def create
