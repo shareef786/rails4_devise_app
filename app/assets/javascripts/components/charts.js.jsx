@@ -143,7 +143,7 @@ var LineChart=React.createClass({
 
     getDefaultProps: function() {
         return {
-            width: 600,
+            width: 800,
             height: 300,
             chartId: 'v1_chart'
         };
@@ -153,14 +153,9 @@ var LineChart=React.createClass({
             tooltip:{ display:false,data:{key:'',value:''}},
             width:this.props.width,
             books: [
-                {day:'02-11-2016',count:180},
-                {day:'02-12-2016',count:250},
-                {day:'02-13-2016',count:150},
-                {day:'02-14-2016',count:496},
-                {day:'02-15-2016',count:140},
-                {day:'02-16-2016',count:380},
-                {day:'02-17-2016',count:100},
-                {day:'02-18-2016',count:150}
+                {day:'01-01-2017',count:66},
+                {day:'01-03-2017',count:33},
+                {day:'01-04-2017',count:55}
             ]
         };
     },
@@ -184,7 +179,7 @@ var LineChart=React.createClass({
             .domain(d3.extent(data, function (d) {
                 return d.date;
             }))
-            .rangeRound([0, w]);
+            .rangeRound([1, w]);
 
         var y = d3.scale.linear()
             .domain([0,d3.max(data,function(d){
@@ -199,12 +194,10 @@ var LineChart=React.createClass({
 
         var xAxis = d3.svg.axis()
             .scale(x)
-            .orient('bottom')
             .tickValues(data.map(function(d,i){
                 if(i>0)
                     return d.date;
-            }).splice(1))
-            .ticks(4);
+            }).splice(1));
 
         var yGrid = d3.svg.axis()
             .scale(y)

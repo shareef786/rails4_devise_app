@@ -3,10 +3,15 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.all.sort_by(&:created_at)
-
+    @booksjson = [
+      {day:'02-16-2016',count:380},
+      {day:'02-17-2016',count: @books.last.price},
+      {day:'02-18-2016',count:150}
+    ]
+# binding.pry
     respond_to do |format|
       format.html  # index.html.erb
-      format.json  { render :json => @books }
+      format.json  { render :json => @booksjson }
     end
   end
 
