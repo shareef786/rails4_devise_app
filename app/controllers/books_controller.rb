@@ -3,6 +3,11 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.all.sort_by(&:created_at)
+
+    respond_to do |format|
+      format.html  # index.html.erb
+      format.json  { render :json => @books }
+    end
   end
 
   def create
