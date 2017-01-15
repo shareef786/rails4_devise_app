@@ -14,3 +14,6 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+# Added by webpack-rails
+/node_modules
+/public/webpack

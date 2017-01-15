@@ -3,5 +3,6 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../rails_and_react" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../webpack-rails-demo" vcs="Git" />
   </component>
 </project>
