@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/rails4_devise_app.iml" filepath="$PROJECT_DIR$/.idea/rails4_devise_app.iml" />
       <module fileurl="file://$PROJECT_DIR$/../rails_and_react/.idea/rails_and_react.iml" filepath="$PROJECT_DIR$/../rails_and_react/.idea/rails_and_react.iml" />
       <module fileurl="file://$PROJECT_DIR$/../sample-react-rails-app/.idea/sample-react-rails-app.iml" filepath="$PROJECT_DIR$/../sample-react-rails-app/.idea/sample-react-rails-app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../webpack-rails-demo/.idea/webpack-rails-demo.iml" filepath="$PROJECT_DIR$/../webpack-rails-demo/.idea/webpack-rails-demo.iml" />
     </modules>
   </component>
 </project>

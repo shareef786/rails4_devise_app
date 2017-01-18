@@ -9,7 +9,6 @@ gem 'devise'
 gem 'react-rails', '~> 1.0'
 gem 'bootstrap-sass'
 gem 'devise-bootstrapped', github: 'king601/devise-bootstrapped'
-gem 'webpack-rails'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
@@ -51,5 +50,3 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
-gem "foreman"
