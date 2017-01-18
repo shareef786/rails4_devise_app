@@ -153,9 +153,7 @@ var LineChart=React.createClass({
             tooltip:{ display:false,data:{key:'',value:''}},
             width:this.props.width,
             books: [
-                {day:'01-01-2017',count:66},
-                {day:'01-03-2017',count:33},
-                {day:'01-04-2017',count:55}
+                
             ]
         };
     },
@@ -169,23 +167,14 @@ var LineChart=React.createClass({
             w = this.state.width - (margin.left + margin.right),
             h = this.props.height - (margin.top + margin.bottom);
 
-        var parseDate = d3.time.format("%m-%d-%Y").parse;
+        var parseDate = d3.time.format("%Y-%m-%d").parse;
 
         data.forEach(function (d) {
             d.date = parseDate(d.day);
         });
 
-        var x = d3.time.scale()
-            .domain(d3.extent(data, function (d) {
-                return d.date;
-            }))
-            .rangeRound([1, w]);
-
-        var y = d3.scale.linear()
-            .domain([0,d3.max(data,function(d){
-                return d.count+100;
-            })])
-            .range([h, 0]);
+        var x = d3.time.scale().range([0, w]);
+        var y = d3.scale.linear().range([h, 0]);
 
         var yAxis = d3.svg.axis()
             .scale(y)
@@ -194,10 +183,11 @@ var LineChart=React.createClass({
 
         var xAxis = d3.svg.axis()
             .scale(x)
-            .tickValues(data.map(function(d,i){
-                if(i>0)
-                    return d.date;
-            }).splice(1));
+            .orient('bottom')
+            .ticks(d3.time.days, 1)
+            .tickFormat(d3.time.format('%a %d'))
+            .tickSize(0)
+            .tickPadding(8);
 
         var yGrid = d3.svg.axis()
             .scale(y)
@@ -213,7 +203,8 @@ var LineChart=React.createClass({
             .y(function (d) {
                 return y(d.count);
             }).interpolate('cardinal');
-
+        x.domain(d3.extent(data, function(d) { return d.date; }));
+        y.domain([0, d3.max(data, function(d) { return d.count; })]);
 
         var transform='translate(' + margin.left + ',' + margin.top + ')';
 
