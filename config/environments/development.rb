@@ -13,6 +13,13 @@ Rails4DeviseApp::Application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
+  # In development send *wp-bundle.js to the webpack-dev-server running on 8080
+  config.action_controller.asset_host = Proc.new { |source|
+    if source =~ /wp_bundle\.js$/i
+      "http://localhost:8080"
+    end
+  }
+
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
