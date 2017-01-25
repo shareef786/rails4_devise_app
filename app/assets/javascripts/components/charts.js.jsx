@@ -158,7 +158,10 @@ var LineChart=React.createClass({
         };
     },
     componentDidMount() {
-        $.getJSON('/books.json', (response) => { this.setState({ books: response }) });
+      $.getJSON('/books.json', (response) => { this.setState({ books: response }) });
+      setTimeout(function() {
+        },
+        1000);
     },
     render:function(){
         var data=this.state.books;
@@ -185,7 +188,7 @@ var LineChart=React.createClass({
             .scale(x)
             .orient('bottom')
             .ticks(d3.time.days, 1)
-            .tickFormat(d3.time.format('%a %d'))
+            .tickFormat(d3.time.format('%d'))
             .tickSize(0)
             .tickPadding(8);
 
@@ -252,4 +255,4 @@ var Visitors = React.createClass({
     }
 });
 
-// ReactDOM.render(<Visitors/>,document.getElementById("top-line-chart"));
+//ReactDOM.render(<LineChart/>,document.getElementById("top-line-chart"));
