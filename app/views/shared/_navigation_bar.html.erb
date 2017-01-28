@@ -20,6 +20,13 @@
         <!--<button type="submit" class="btn btn-default">Submit</button>-->
       <!--</form>-->
       <ul class="nav navbar-nav navbar-right">
+        <li> <div class="select-box"><select id="chart-types" class="form-control">
+          <option selected disabled>Select Chart</option>
+          <option value="linechart">Line Chart</option>
+          <option value="barchart">Bar Chart</option>
+          <option value="piechart">Pie Chart</option>
+        </select></div>
+        </li>
         <% if user_signed_in? %>
             <li>
               <%= link_to('Home', books_path)  %>

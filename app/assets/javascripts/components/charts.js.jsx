@@ -185,7 +185,7 @@ var LineChart=React.createClass({
             .scale(x)
             .orient('bottom')
             .ticks(d3.time.days, 1)
-            .tickFormat(d3.time.format('%a %d'))
+            .tickFormat(d3.time.format('%d'))
             .tickSize(0)
             .tickPadding(8);
 
@@ -237,19 +237,5 @@ var LineChart=React.createClass({
 
 });
 
-window.LineChart=LineChart;
-
-var Visitors = React.createClass({
-    render:function(){
-        return (
-            <div>
-                <h3>Visitors to your site</h3>
-                <div className="bottom-right-svg">
-                    <LineChart/>
-                </div>
-            </div>
-        )
-    }
-});
 
 // ReactDOM.render(<Visitors/>,document.getElementById("top-line-chart"));

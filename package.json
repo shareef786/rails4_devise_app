@@ -1,0 +1,11 @@
+{
+  "name": "rails4_react_app",
+  "version": "0.0.1",
+  "license": "MIT",
+  "dependencies": {
+
+  },
+  "scripts": {
+    "start": "webpack-dev-server"
+  }
+}
