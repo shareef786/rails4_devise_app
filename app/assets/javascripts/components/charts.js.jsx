@@ -240,19 +240,5 @@ var LineChart=React.createClass({
 
 });
 
-window.LineChart=LineChart;
-
-var Visitors = React.createClass({
-    render:function(){
-        return (
-            <div>
-                <h3>Visitors to your site</h3>
-                <div className="bottom-right-svg">
-                    <LineChart/>
-                </div>
-            </div>
-        )
-    }
-});
 
 //ReactDOM.render(<LineChart/>,document.getElementById("top-line-chart"));

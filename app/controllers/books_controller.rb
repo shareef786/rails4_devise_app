@@ -3,15 +3,7 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.all.sort_by(&:created_at)
-    @booksjson = @books.map{|b| {"day" => "#{b.date}", "count" => b.price}}
-    # @booksjson = [
-    #   {"day" => "2016-02-16","count" => 380},
-    #   {'day' => '2016-02-17','count' => @books.last.price},
-    #   {'day' => '2016-02-18','count' => @books.first.price},
-    #   {'day' => '2016-02-19','count' => 100},
-    #   {'day' => '2016-02-20','count' => 150}
-    # ]
-# binding.pry
+    @booksjson = @books.map{|b| {"day" => b.date, "count" => b.price}}
     respond_to do |format|
       format.html  # index.html.erb
       format.json  { render :json => @booksjson }
