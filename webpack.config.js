@@ -10,10 +10,10 @@ module.exports = [{
     'es5-shim/es5-shim',
     'es5-shim/es5-sham',
     'babel-polyfill',
-    './app/assets/javascripts/components/line'
+    './app/assets/javascripts/components/chart'
   ],
   output: {
-    filename: './app/assets/webpack/line.js'
+    filename: './app/assets/webpack/chart.js'
   },
   plugins: [
     new webpack.DefinePlugin({

@@ -10,6 +10,7 @@
       title: ReactDOM.findDOMNode(@refs.title).value
       date: ReactDOM.findDOMNode(@refs.date).value
       price: ReactDOM.findDOMNode(@refs.price).value
+      quantity: ReactDOM.findDOMNode(@refs.quantity).value
     $.ajax
       method: 'PUT'
       dataType: 'JSON'
@@ -37,6 +38,7 @@
       React.DOM.td null, @props.book.title
       React.DOM.td null, priceFormat(@props.book.price)
       React.DOM.td null, @props.book.date
+      React.DOM.td null, @props.book.quantity
       React.DOM.td null,
         React.DOM.a
           className: 'btn btn-default'
@@ -66,6 +68,12 @@
           type: 'date'
           defaultValue: @props.book.date
           ref: 'date'
+      React.DOM.td null,
+        React.DOM.input
+          className: 'form-control'
+          type: 'numder'
+          defaultValue: @props.book.quantity
+          ref: 'quantity'
       React.DOM.td null,
         React.DOM.a
           className: 'btn btn-default'

@@ -3,10 +3,20 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.all.sort_by(&:created_at)
-    @booksjson = @books.map{|b| {"day" => b.date, "count" => b.price}}
+    if params[:type] == 'line'
+      @booksArray = @books.map{|b| {"day" => b.date, "count" => b.quantity} if b.quantity > 0}.compact
+    elsif params[:type] == 'pie'
+      @booksArray = @books.map{|b| {"label" => b.title, "value" => b.quantity} if b.quantity > 0}.compact
+    else
+      @booksArray = []
+      @booksjson = @books.map{|b| {"x" => b.title, "y" => b.quantity} if b.quantity > 0}.compact
+      hash = {"values" => @booksjson}
+      @booksArray.push(hash)
+    end
+
     respond_to do |format|
       format.html  # index.html.erb
-      format.json  { render :json => @booksjson }
+      format.json  { render :json => @booksArray }
     end
   end
 
@@ -45,6 +55,6 @@ class BooksController < ApplicationController
   end
 
   def book_params
-    params.require(:book).permit(:title, :date, :price)
+    params.require(:book).permit(:title, :date, :price, :quantity)
   end
 end

@@ -158,17 +158,27 @@ var LineChart=React.createClass({
         };
     },
     componentDidMount() {
-      $.getJSON('/books.json', (response) => { this.setState({ books: response }) });
-      setTimeout(function() {
-        },
-        1000);
+      //$.getJSON('/books.json?type=line', (response) => { this.setState({ books: response }) });
+      setInterval(
+        () => $.getJSON('/books.json?type=line', (response) => { this.setState({ books: response }) }),
+        1000
+      );
+    //  setTimeout(function() {
+    //    },
+    //    1000);
     },
     render:function(){
         var data=this.state.books;
 
-        var margin = {top: 5, right: 50, bottom: 20, left: 50},
+        var margin = {top: 25, right: 50, bottom: 20, left: 50},
             w = this.state.width - (margin.left + margin.right),
+            padding = 100, // space around the chart, not including labels
             h = this.props.height - (margin.top + margin.bottom);
+        // create an svg container
+        var vis = d3.select("body").
+          append("svg:svg")
+          .attr("width", w)
+          .attr("height", h);
 
         var parseDate = d3.time.format("%Y-%m-%d").parse;
 
@@ -187,8 +197,8 @@ var LineChart=React.createClass({
         var xAxis = d3.svg.axis()
             .scale(x)
             .orient('bottom')
-            .ticks(d3.time.days, 1)
-            .tickFormat(d3.time.format('%d'))
+            .ticks(d3.time.days, 5)
+            .tickFormat(d3.time.format('%d %b'))
             .tickSize(0)
             .tickPadding(8);
 
@@ -210,6 +220,34 @@ var LineChart=React.createClass({
         y.domain([0, d3.max(data, function(d) { return d.count; })]);
 
         var transform='translate(' + margin.left + ',' + margin.top + ')';
+        // draw y axis with labels and move in from the size by the amount of padding
+        vis.append("g")
+          .attr("class", "axis")
+          .attr("transform", "translate("+padding+",0)")
+          .call(yAxis);
+        // draw x axis with labels and move to the bottom of the chart area
+        vis.append("g")
+          .attr("class", "xaxis axis")  // two classes, one for css formatting, one for selection below
+          .attr("transform", "translate(0," + (h - padding) + ")")
+          .call(xAxis);
+        // now rotate text on x axis
+        // solution based on idea here: https://groups.google.com/forum/?fromgroups#!topic/d3-js/heOBPQF3sAY
+        // first move the text left so no longer centered on the tick
+        // then rotate up to get 45 degrees.
+        vis.selectAll(".xaxis text")  // select all the text elements for the xaxis
+          .attr("transform", function(d) {
+            return "translate(" + this.getBBox().height*-2 + "," + this.getBBox().height + ")rotate(-45)";
+          });
+        // now add titles to the axes
+        vis.append("text")
+          .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+          .attr("transform", "translate("+ (padding/2) +","+(h/2)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
+          .text("Value");
+
+        vis.append("text")
+          .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+          .attr("transform", "translate("+ (w/2) +","+(h-(padding/3))+")")  // centre below axis
+          .text("Date");
 
         return (
             <div>

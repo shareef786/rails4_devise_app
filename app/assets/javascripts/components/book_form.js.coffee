@@ -3,6 +3,7 @@
     title: ''
     date: ''
     price: ''
+    quantity: ''
   handleSubmit: (e) ->
     e.preventDefault()
     $.post '/books', {book: @state}, (data) =>
@@ -40,6 +41,15 @@
           name: 'date'
           value: @state.date
           onChange: @handleChange
+      React.DOM.div
+        className: 'form-group space-adjust'
+        React.DOM.input
+          type: 'number'
+          className: 'form-control'
+          placeholder: 'Quantity'
+          name: 'quantity'
+          value: @state.quantity
+          onChange: @handleChange
       React.DOM.button
         type: 'submit'
         className: 'btn btn-primary space-adjust'
@@ -50,4 +60,4 @@
     name = e.target.name
     @setState "#{name}": e.target.value
   valid: ->
-    @state.title && @state.date && @state.price
+    @state.title && @state.date && @state.price && @state.quantity
