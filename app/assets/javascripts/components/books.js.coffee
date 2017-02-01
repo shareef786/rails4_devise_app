@@ -34,7 +34,8 @@
         React.DOM.tr null,
           React.DOM.th null, 'Title'
           React.DOM.th null, 'Price'
-          React.DOM.th null, 'Purchased Date'
+          React.DOM.th null, 'Published Date'
+          React.DOM.th null, 'Stock (No of books)'
           React.DOM.th null, 'Actions'
       React.DOM.tbody null,
         for book in @state.books
@@ -58,9 +59,8 @@
       className: ''
       React.DOM.div
         className: 'row'
-        React.createElement AmountBox, type: "success", price: @credits(), text: "Credit"
-        React.createElement AmountBox, type: "danger", price: @debits(), text: "Dedit"
-        React.createElement AmountBox, type: "info", price: @balance(), text: "Balence"
+        React.createElement AmountBox, type: "success", price: @credits(), text: "Total Amount"
+        React.createElement AmountBox, type: "info", price: @debits(), text: "Stock"
       React.DOM.a
         className: 'pull-right pointer'
         onClick: @hideBalance
@@ -79,14 +79,12 @@
   searchBook: (data) ->
     @setState books: data
   debits: ->
-    debits = @state.books.filter (val) -> val.price < 0
+    debits = @state.books.filter (val) -> val.quantity >= 0
     debits.reduce ((prev, curr) ->
+      prev + parseFloat(curr.quantity)
+    ), 0
+  credits: ->
+    credits = @state.books.filter (val) -> val.price >= 0
+    credits.reduce ( (prev,curr) ->
       prev + parseFloat(curr.price)
     ), 0
-   credits: ->
-     credits = @state.books.filter (val) -> val.price >= 0
-     credits.reduce ( (prev,curr) ->
-       prev + parseFloat(curr.price)
-     ), 0
-  balance: ->
-    @debits() + @credits()

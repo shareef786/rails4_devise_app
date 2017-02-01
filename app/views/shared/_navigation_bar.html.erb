@@ -21,6 +21,13 @@
       <!--</form>-->
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
+            <li> <div class="select-box"><select id="chart-types" class="form-control">
+              <option disabled>Select Chart</option>
+              <option selected value="piechart">Pie Chart</option>
+              <option value="linechart">Line Chart</option>
+              <option value="barchart">Bar Chart</option>
+            </select></div>
+            </li>
             <li>
               <%= link_to('Home', books_path)  %>
             </li>

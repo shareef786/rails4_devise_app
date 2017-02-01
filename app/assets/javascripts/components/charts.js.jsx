@@ -153,39 +153,37 @@ var LineChart=React.createClass({
             tooltip:{ display:false,data:{key:'',value:''}},
             width:this.props.width,
             books: [
-                {day:'01-01-2017',count:66},
-                {day:'01-03-2017',count:33},
-                {day:'01-04-2017',count:55}
+                
             ]
         };
     },
     componentDidMount() {
-        $.getJSON('/books.json', (response) => { this.setState({ books: response }) });
+      //$.getJSON('/books.json?type=line', (response) => { this.setState({ books: response }) });
+      setInterval(
+        () => $.getJSON('/books.json?type=line', (response) => { this.setState({ books: response }) }),
+        1000
+      );
+    //  setTimeout(function() {
+    //    },
+    //    1000);
     },
     render:function(){
         var data=this.state.books;
 
-        var margin = {top: 5, right: 50, bottom: 20, left: 50},
+        var margin = {top: 25, right: 50, bottom: 20, left: 50},
             w = this.state.width - (margin.left + margin.right),
+            padding = 100, // space around the chart, not including labels
             h = this.props.height - (margin.top + margin.bottom);
+        // create an svg container
 
-        var parseDate = d3.time.format("%m-%d-%Y").parse;
+        var parseDate = d3.time.format("%Y-%m-%d").parse;
 
         data.forEach(function (d) {
             d.date = parseDate(d.day);
         });
 
-        var x = d3.time.scale()
-            .domain(d3.extent(data, function (d) {
-                return d.date;
-            }))
-            .rangeRound([1, w]);
-
-        var y = d3.scale.linear()
-            .domain([0,d3.max(data,function(d){
-                return d.count+100;
-            })])
-            .range([h, 0]);
+        var x = d3.time.scale().range([0, w]);
+        var y = d3.scale.linear().range([h, 0]);
 
         var yAxis = d3.svg.axis()
             .scale(y)
@@ -194,10 +192,11 @@ var LineChart=React.createClass({
 
         var xAxis = d3.svg.axis()
             .scale(x)
-            .tickValues(data.map(function(d,i){
-                if(i>0)
-                    return d.date;
-            }).splice(1));
+            .orient('bottom')
+            .ticks(d3.time.days, 5)
+            .tickFormat(d3.time.format('%d %b'))
+            .tickSize(0)
+            .tickPadding(8);
 
         var yGrid = d3.svg.axis()
             .scale(y)
@@ -213,9 +212,12 @@ var LineChart=React.createClass({
             .y(function (d) {
                 return y(d.count);
             }).interpolate('cardinal');
-
+        x.domain(d3.extent(data, function(d) { return d.date; }));
+        y.domain([0, d3.max(data, function(d) { return d.count; })]);
 
         var transform='translate(' + margin.left + ',' + margin.top + ')';
+        // draw y axis with labels and move in from the size by the amount of padding
+
 
         return (
             <div>
@@ -246,19 +248,5 @@ var LineChart=React.createClass({
 
 });
 
-window.LineChart=LineChart;
 
-var Visitors = React.createClass({
-    render:function(){
-        return (
-            <div>
-                <h3>Visitors to your site</h3>
-                <div className="bottom-right-svg">
-                    <LineChart/>
-                </div>
-            </div>
-        )
-    }
-});
-
-// ReactDOM.render(<Visitors/>,document.getElementById("top-line-chart"));
+//ReactDOM.render(<LineChart/>,document.getElementById("top-line-chart"));
