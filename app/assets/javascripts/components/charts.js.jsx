@@ -172,7 +172,6 @@ var LineChart=React.createClass({
 
         var margin = {top: 25, right: 50, bottom: 20, left: 50},
             w = this.state.width - (margin.left + margin.right),
-            padding = 100, // space around the chart, not including labels
             h = this.props.height - (margin.top + margin.bottom);
         // create an svg container
 

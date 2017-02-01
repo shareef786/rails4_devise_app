@@ -4,7 +4,7 @@ class BooksController < ApplicationController
   def index
     @books = Book.all.sort_by(&:created_at)
     if params[:type] == 'line'
-      @booksArray = @books.map{|b| {"day" => b.date, "count" => b.quantity} if b.quantity > 0}.compact
+      @booksArray = @books.map{|b| {"day" => b.date, "count" => b.quantity} }
     elsif params[:type] == 'pie'
       @booksArray = @books.map{|b| {"label" => b.title, "value" => b.quantity} if b.quantity > 0}.compact
     else
