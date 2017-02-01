@@ -32362,7 +32362,11 @@
 
 	    var _this = _possibleConstructorReturn(this, (Piechart.__proto__ || Object.getPrototypeOf(Piechart)).call(this, props));
 
-	    _this.state = { pieData: [{ label: 'Margarita', value: 20.0 }, { label: 'John', value: 55.0 }, { label: 'Tim', value: 25.0 }] };
+	    _this.state = { pieData: [
+	        //{label: 'Margarita', value: 20.0},
+	        //{label: 'John', value: 55.0},
+	        //{label: 'Tim', value: 25.0 }
+	      ] };
 
 	    // This binding is necessary to make `this` work in the callback
 	    return _this;
@@ -32379,21 +32383,18 @@
 	          _this2.setState({ pieData: response });
 	        });
 	      }, 1000);
-	      //setTimeout(function() {
-	      //  },
-	      //  1000);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(_reactD.PieChart, {
 	        data: this.state.pieData,
-	        width: 400,
-	        height: 400,
+	        width: 800,
+	        height: 300,
 	        radius: 100,
 	        innerRadius: 20,
 	        sectorBorderColor: 'white',
-	        title: 'Stocks of books'
+	        title: 'Books Availability by Type'
 	      });
 	    }
 	  }]);
@@ -45898,7 +45899,7 @@
 	        width: 500,
 	        height: 200,
 	        fill: '#3182bd',
-	        title: 'Stocks of books',
+	        title: 'Books Availability by Type',
 	        yAxisLabel: 'Stocks',
 	        xAxisLabel: 'Books'
 	      });

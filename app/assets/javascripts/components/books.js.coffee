@@ -60,7 +60,7 @@
       React.DOM.div
         className: 'row'
         React.createElement AmountBox, type: "success", price: @credits(), text: "Total Amount"
-        React.createElement AmountBox, type: "info", price: @debits(), text: "Books Stock"
+        React.createElement AmountBox, type: "info", price: @debits(), text: "Stock"
       React.DOM.a
         className: 'pull-right pointer'
         onClick: @hideBalance

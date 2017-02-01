@@ -32,7 +32,7 @@ class Barchart extends React.Component {
         width={500}
         height={200}
         fill={'#3182bd'}
-        title='Stocks of books'
+        title='Books Availability by Type'
         yAxisLabel='Stocks'
         xAxisLabel='Books'
       />
