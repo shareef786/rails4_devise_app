@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {PieChart} from 'react-d3';
+// import {PieChart} from 'react-d3';
+var PieChart = require('react-d3-basic').PieChart;
+
 
 class Piechart extends React.Component {
 
@@ -12,8 +14,9 @@ class Piechart extends React.Component {
       {label: 'Tim', value: 25.0 }
     ]};
 
-    // This binding is necessary to make `this` work in the callback
   }
+
+
   componentDidMount() {
     //$.getJSON('/books.json', (response) => { this.setState({ pieData: response }) });
     setInterval(
@@ -26,16 +29,51 @@ class Piechart extends React.Component {
   }
 
   render() {
+      console.log(this.state.pieData);
+      var width = 700,
+          height = 400,
+          value = function(d) {
+              return +d.value;
+          },
+          name = function(d) {
+              console.log(d);
+              return d.label;
+          },
+          chartSeries = [
+              {
+                  "field": "<5",
+                  "name": "less than 5"
+              },
+              {
+                  "field": "5-13",
+                  "name": "5 to 13"
+              },
+              {
+                  "field": "14-17",
+                  "name": "14 to 17"
+              },
+              {
+                  "field": "18-24",
+                  "name": "18 to 24"
+              },
+              {
+                  "field": "25-44",
+                  "name": "25 to 44"
+              },
+              {
+                  "field": "45-64",
+                  "name": "45 to 64"
+              }
+          ];
     return (
-      <PieChart
-        data={this.state.pieData}
-        width={400}
-        height={400}
-        radius={100}
-        innerRadius={20}
-        sectorBorderColor="white"
-        title="Stocks of books"
-      />
+        <PieChart
+            data= {this.state.pieData}
+            width= {width}
+            height= {height}
+            chartSeries= {chartSeries}
+            value = {value}
+            name = {name}
+        />
     );
   }
 }
