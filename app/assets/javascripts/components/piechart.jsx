@@ -23,6 +23,9 @@ class Piechart extends React.Component {
   }
 
   render() {
+    if(this.state.pieData.length == 0){
+      return (<h4 className="text-center">No books are in stock </h4>)
+    }
     return (
       <PieChart
         data={this.state.pieData}

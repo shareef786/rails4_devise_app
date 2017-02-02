@@ -26,6 +26,9 @@ class Barchart extends React.Component {
   }
 
   render (){
+    if(this.state.barData.values.length == 0){
+      return (<h4 className="text-center">No books are in stock </h4>)
+    }
     return (
       <BarChart
         data={this.state.barData}

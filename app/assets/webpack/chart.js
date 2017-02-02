@@ -32387,6 +32387,13 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      if (this.state.pieData.length == 0) {
+	        return _react2.default.createElement(
+	          'h4',
+	          { className: 'text-center' },
+	          'No books are in stock '
+	        );
+	      }
 	      return _react2.default.createElement(_reactD.PieChart, {
 	        data: this.state.pieData,
 	        width: 800,
@@ -45894,6 +45901,13 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      if (this.state.barData.values.length == 0) {
+	        return _react2.default.createElement(
+	          'h4',
+	          { className: 'text-center' },
+	          'No books are in stock '
+	        );
+	      }
 	      return _react2.default.createElement(_reactD.BarChart, {
 	        data: this.state.barData,
 	        width: 500,

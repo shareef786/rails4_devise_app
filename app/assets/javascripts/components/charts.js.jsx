@@ -152,9 +152,7 @@ var LineChart=React.createClass({
         return {
             tooltip:{ display:false,data:{key:'',value:''}},
             width:this.props.width,
-            books: [
-                
-            ]
+            books: [ ]
         };
     },
     componentDidMount() {
@@ -163,9 +161,6 @@ var LineChart=React.createClass({
         () => $.getJSON('/books.json?type=line', (response) => { this.setState({ books: response }) }),
         1000
       );
-    //  setTimeout(function() {
-    //    },
-    //    1000);
     },
     render:function(){
         var data=this.state.books;
@@ -220,6 +215,7 @@ var LineChart=React.createClass({
 
         return (
             <div>
+              Line Chart
                 <svg id={this.props.chartId} width={this.state.width} height={this.props.height}>
 
                     <g transform={transform}>
@@ -236,16 +232,8 @@ var LineChart=React.createClass({
 
                         <ToolTip tooltip={this.state.tooltip}/>
                     </g>
-
                 </svg>
-
-
             </div>
         );
     }
-
-
 });
-
-
-//ReactDOM.render(<LineChart/>,document.getElementById("top-line-chart"));
